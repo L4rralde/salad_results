@@ -1,0 +1,72 @@
+agg_arch: SALAD
+agg_config:
+  cluster_dim: 128
+  num_channels: 768
+  num_clusters: 64
+  token_dim: 256
+backbone_arch: dinov3_vitb16
+backbone_config:
+  norm_layer: true
+  num_trainable_blocks: 4
+  return_token: true
+  rope_sincos: true
+batch_sampler: null
+batch_size: 32
+cities:
+- Bangkok
+- BuenosAires
+- LosAngeles
+- MexicoCity
+- OSL
+- Rome
+- Barcelona
+- Chicago
+- Madrid
+- Miami
+- Phoenix
+- TRT
+- Boston
+- Lisbon
+- Medellin
+- Minneapolis
+- PRG
+- WashingtonDC
+- Brussels
+- London
+- Melbourne
+- Osaka
+- PRS
+faiss_gpu: false
+image_size:
+- 256
+- 256
+img_per_place: 4
+loss_name: MultiSimilarityLoss
+lr: 6.0e-05
+lr_sched: linear
+lr_sched_args:
+  end_factor: 0.2
+  start_factor: 1
+  total_iters: 4000
+mean_std:
+  mean:
+  - 0.43
+  - 0.411
+  - 0.296
+  std:
+  - 0.213
+  - 0.156
+  - 0.143
+min_img_per_place: 4
+miner_margin: 0.1
+miner_name: MultiSimilarityMiner
+momentum: 0.9
+num_workers: 10
+optimizer: adamw
+random_sample_from_each_place: true
+show_data_stats: true
+shuffle_all: false
+val_set_names:
+- pitts30k_val
+- pitts30k_test
+weight_decay: 9.5e-09
