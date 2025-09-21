@@ -1,8 +1,19 @@
 import os
+import re
 
 import pandas as pd
 import yaml
 from .git_utils import GIT_ROOT
+
+
+def load_yaml_safely(path):
+    with open(path, "r") as f:
+        content = f.read()
+
+    # Strip !!python/tuple to just parse as a list
+    content = re.sub(r'!!python/tuple', '', content)
+
+    return yaml.safe_load(content)
 
 
 class LightningLogs:
@@ -26,8 +37,7 @@ class LightningLogs:
         hparams_path = os.path.join(self.path, 'hparams.yaml')
         metrics_path = os.path.join(self.path, 'metrics.csv')
 
-        with open(hparams_path, 'r') as f:
-            self._params = yaml.safe_load(f)
+        self._params = load_yaml_safely(hparams_path)
 
         self._metrics = pd.read_csv(metrics_path)
 
